@@ -42,16 +42,16 @@ public class Attack extends Node {
     public boolean altInteract(Entity e, String cmd, String sub){
 
         if(e != null){
-            if(altIsOnScreen(e)){
+            if(!altIsOnScreen(e)){
                 for(Polygon p : e.getBounds()){
                     if(screen.contains(p.getBounds())){
                             clickPoint.setLocation(p.getBounds().x,p.getBounds().y);
                     }
                 }
+                e.hover();
+                Task.sleep(25,50);
                 if(Widgets.get(548,436).getChild(0) != null && Widgets.get(548, 436).getChild(0) != null){
                     if(Widgets.get(548, 436).getChild(0).getText().contains(cmd) && Widgets.get(548, 436).getChild(0).getText().contains(sub)){
-                        e.hover();
-                        Task.sleep(25,50);
                         Mouse.click(clickPoint, true);
                         Task.sleep(250,500);
                     }else{
@@ -59,7 +59,9 @@ public class Attack extends Node {
                     }
                 }
 
-            }        // && Players.getLocal().getInteracting().getInteracting().equals(Players.getLocal().get()
+            }else{
+                e.interact(cmd);
+            }// && Players.getLocal().getInteracting().getInteracting().equals(Players.getLocal().get()
             int x = 0;
             do{
                Task.sleep(250,350);

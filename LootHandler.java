@@ -110,10 +110,10 @@ public class LootHandler extends Node {
                     }
                 }
                 if(Widgets.get(548, 436).getChild(0) != null && Widgets.get(548, 436).getChild(0) != null){
+                    e.hover();
                     if(Widgets.get(548, 436).getChild(0).getText().contains(cmd) && Widgets.get(548, 436).getChild(0).getText().contains(sub)){
-                        e.hover();
                         clickPoint.setLocation(e.getCentralPoint());
-                        Task.sleep(25,50);
+                        Task.sleep(50,150);
                         Mouse.click(clickPoint, true);
                         Task.sleep(250,500);
                     }else{
