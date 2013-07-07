@@ -1,9 +1,12 @@
 package CockRoachCrafter;
 
+import CockRoachCrafter.Nodes.BankingHandlers.*;
+import CockRoachCrafter.Nodes.CombatHandlers.*;
+import CockRoachCrafter.Nodes.LootHandlers.*;
+
 import org.powerbot.core.Bot;
 import org.powerbot.core.event.listeners.PaintListener;
 import org.powerbot.core.script.ActiveScript;
-import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.core.script.job.state.Tree;
 import org.powerbot.game.api.Manifest;
@@ -18,7 +21,6 @@ import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.client.Client;
 
 import java.awt.*;
-import java.text.SimpleDateFormat;
 
 
 @Manifest(name = "Cockroach Killer and Body Crafter", authors = "tails111", description = "Kills Cockroaches, collects hides, crafts bodies, high alchs.", version = 1.0)
@@ -116,15 +118,6 @@ public class CockRoachCrafter extends ActiveScript implements PaintListener {
     public void onStart(){
         Mouse.setSpeed(Mouse.Speed.VERY_FAST);
         Camera.setPitch(Random.nextInt(37,45));
-     //   int tempWorld = 0;
-     //   do{
-     //       tempWorld = Random.nextInt(22,115);
-     //       Task.sleep(25);
-     //   }while(worldHandler.isWorldMembers(tempWorld) && !worldHandler.isSkillTotalWorld() && !worldHandler.fullWorld());
-     //   world = tempWorld;
-     //   if(Game.getClientState()==11){
-      //      world = worldHandler.getCurrentWorld();
-      //  }
 
         int x = 0;
         do{
@@ -156,26 +149,6 @@ public class CockRoachCrafter extends ActiveScript implements PaintListener {
             Bot.context().getEventManager().addListener(this);
             client = Bot.client();
         }
-
-     //   if(Game.getClientState()==9 || Game.getClientState()==7){
-     //       worldHandler.selectWorldTab();
-     //       worldHandler.selectWorld(world, true);
-     //       worldHandler.enterGame();
-     //       while(worldHandler.isLoggingIn()){
-     //           Task.sleep(50);
-     //           if(worldHandler.loginErrorVisible()){
-     //               int tempWorld = 0;
-     //               do{
-      //                  tempWorld = Random.nextInt(22,115);
-      //              }while(worldHandler.isWorldMembers(tempWorld) && !worldHandler.isSkillTotalWorld() && !worldHandler.fullWorld());
-      //
-      //              worldHandler.selectWorld(tempWorld, true);
-      //              worldHandler.enterGame();
-      //              world = tempWorld;
-      //          }
-      //      }
-      //  }
-
 
         return Random.nextInt(150, 200);
     }

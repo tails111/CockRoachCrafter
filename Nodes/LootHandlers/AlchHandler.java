@@ -1,15 +1,13 @@
-package CockRoachCrafter;
+package CockRoachCrafter.Nodes.LootHandlers;
+
+import CockRoachCrafter.CockRoachCrafter;
+import CockRoachCrafter.Nodes.CombatHandlers.ActionBarHandler;
+import CockRoachCrafter.RandomHandler;
+
 
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
-import org.powerbot.game.api.methods.Tabs;
-import org.powerbot.game.api.methods.Walking;
-import org.powerbot.game.api.methods.interactive.NPCs;
-import org.powerbot.game.api.methods.interactive.Players;
-import org.powerbot.game.api.methods.node.GroundItems;
 import org.powerbot.game.api.methods.tab.Inventory;
-import org.powerbot.game.api.methods.widget.Camera;
-import org.powerbot.game.api.wrappers.node.GroundItem;
 
 public class AlchHandler extends Node {
 

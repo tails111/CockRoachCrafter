@@ -1,4 +1,6 @@
-package CockRoachCrafter;
+package CockRoachCrafter.Nodes.LootHandlers;
+
+import CockRoachCrafter.CockRoachCrafter;
 
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
@@ -13,9 +15,7 @@ import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.util.Random;
 import org.powerbot.game.api.wrappers.Entity;
-import org.powerbot.game.api.wrappers.Locatable;
 import org.powerbot.game.api.wrappers.Tile;
-import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.node.GroundItem;
 
 import java.awt.*;
@@ -69,11 +69,10 @@ public class LootHandler extends Node {
             5100,5321,5303,5298,5301,5302,5295,5300,5304,2999,995};
     public static int profit = 0;
 
-    CraftingHandler CraftingHandler = new CraftingHandler();
     AlchHandler AlchHandler = new AlchHandler();
     Rectangle screen = new Rectangle(1,55,518,258);
-    Point clickPoint = new Point();
     Tile middleTile = new Tile(3168,4277,1);
+    GroundItem Loot;
 
     public static int getPrices(final int id) {
         int price = 0;
@@ -95,52 +94,14 @@ public class LootHandler extends Node {
     }
 
     public void altCameraTurnTo(Entity e){
+        int x = 0;
         do{
-            Camera.setAngle(Camera.getYaw() + Random.nextInt(15, 25));
+            Camera.setAngle(Camera.getYaw() + Random.nextInt(35, 55));
+            x++;
+            if(x>=15 || e == null){
+                break;
+            }
         }while(!altIsOnScreen(e));
-    }
-
-    public boolean altInteract(Entity e, String cmd, String sub){
-
-        if(e != null){
-            if(altIsOnScreen(e)){
-                for(Polygon p : e.getBounds()){
-                    if(screen.contains(p.getBounds())){
-                        clickPoint.setLocation(p.getBounds().x,p.getBounds().y);
-                    }
-                }
-                if(Widgets.get(548, 436).getChild(0) != null && Widgets.get(548, 436).getChild(0) != null){
-                    e.hover();
-                    if(Widgets.get(548, 436).getChild(0).getText().contains(cmd) && Widgets.get(548, 436).getChild(0).getText().contains(sub)){
-                        clickPoint.setLocation(e.getCentralPoint());
-                        Task.sleep(50,150);
-                        Mouse.click(clickPoint, true);
-                        Task.sleep(250,500);
-                    }else{
-                        e.interact(cmd);
-                    }
-                }
-
-            }        // && Players.getLocal().getInteracting().getInteracting().equals(Players.getLocal().get()
-            int x = 0;
-            do{
-                Task.sleep(250,350);
-                CockRoachCrafter.profit = ("Sleeping after click.");
-                if(Players.getLocal().getInteracting() != null && Players.getLocal() != null){
-                    if(Players.getLocal().getInteracting().getHealthPercent()<=0 || Players.getLocal().isIdle()){
-                        return true;
-                    }
-                } else if (Players.getLocal().getInteracting() == null){
-                    return false;
-                }
-                x++;
-                if(x<=10){
-                    break;
-                }
-            }while(Players.getLocal().getInteracting().equals(e) ||
-                    Players.getLocal().isMoving() || Players.getLocal().isInCombat());
-        }
-        return false;
     }
 
     public boolean altIsOnScreen(Entity e){
@@ -157,7 +118,7 @@ public class LootHandler extends Node {
         if(!Tabs.getCurrent().equals(Tabs.INVENTORY)){
             Tabs.INVENTORY.open();
         }
-        GroundItem Loot = GroundItems.getNearest(LOOT_TABLE);
+        Loot = GroundItems.getNearest(LOOT_TABLE);
         if(Inventory.isFull() && Inventory.contains(379) && Inventory.getCount(25551)<2){
             Inventory.getItem(379).getWidgetChild().interact("Eat");
         }
@@ -172,7 +133,7 @@ public class LootHandler extends Node {
 
 
         while(activate()){
-            GroundItem Loot = GroundItems.getNearest(LOOT_TABLE);
+            Loot = GroundItems.getNearest(LOOT_TABLE);
         if(Loot != null){      //If Loot isn't on screen, will walk and turn camera to it.
             if(!altIsOnScreen(Loot)){
                 CockRoachCrafter.profit = "Walking towards Loot";
@@ -184,8 +145,7 @@ public class LootHandler extends Node {
                     CockRoachCrafter.actualProfit+=Loot.getGroundItem().getStackSize();
                     sleep(800,1000);
                 }
-                if(altInteract(Loot, "Take", Loot.getGroundItem().getName())){
-
+                if(Loot.interact("Take")){
                     CockRoachCrafter.actualProfit += getPrices(Loot.getId());
                     sleep(800,1000);
                 }
@@ -197,7 +157,7 @@ public class LootHandler extends Node {
                 if(Calculations.distanceTo(Loot)>=2){
                     CockRoachCrafter.profit = "Turning Camera to Loot.";
                     if(!altIsOnScreen(Loot)){
-                        Camera.turnTo(Loot, Random.nextInt(45, 90));
+                        altCameraTurnTo(Loot);
                     }
                 }
                 CockRoachCrafter.profit = "Grabbing Loot.";
@@ -205,7 +165,7 @@ public class LootHandler extends Node {
                     CockRoachCrafter.actualProfit+=Loot.getGroundItem().getStackSize();
                     sleep(800,1000);
                 }
-                if(altInteract(Loot, "Take", Loot.getGroundItem().getName())){
+                if(Loot.interact("Take")){
                      CockRoachCrafter.actualProfit += getPrices(Loot.getId());
                      sleep(800,1000);
                 }

@@ -1,4 +1,4 @@
-package CockRoachCrafter;
+package CockRoachCrafter.Nodes.CombatHandlers;
 
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.Settings;

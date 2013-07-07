@@ -1,4 +1,6 @@
-package CockRoachCrafter;
+package CockRoachCrafter.Nodes.BankingHandlers;
+
+import CockRoachCrafter.CockRoachCrafter;
 
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Calculations;
@@ -6,6 +8,7 @@ import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.wrappers.Tile;
+import org.powerbot.game.api.wrappers.interactive.Character;
 
 public class WalkToBank extends Node {
 
@@ -13,12 +16,15 @@ public class WalkToBank extends Node {
             new Tile(3074,3502,0), new Tile(3081, 3501, 0), new Tile(3087, 3498, 0), new Tile(3093, 3494, 0)};
     Tile bankTile = new Tile(3093,3494,0);
     Tile afterTeleport = new Tile(3067,3505,0);
+
     private final int[] ITEMS = {554,561,1734,379};
 
-    @Override
+    Character me;
+
     public boolean activate(){
+        me = Players.getLocal();
         return (Calculations.distanceTo(afterTeleport)<=45) && !Inventory.containsAll(ITEMS) &&
-                (Players.getLocal().getAnimation()==-1 && Calculations.distanceTo(bankTile)>=5);
+                (me.getAnimation()==-1 && Calculations.distanceTo(bankTile)>=5);
     }
 
     @Override

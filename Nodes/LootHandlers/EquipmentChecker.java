@@ -1,5 +1,6 @@
-package CockRoachCrafter;
+package CockRoachCrafter.Nodes.LootHandlers;
 
+import CockRoachCrafter.CockRoachCrafter;
 
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;

@@ -1,16 +1,12 @@
-package CockRoachCrafter;
+package CockRoachCrafter.Nodes.LootHandlers;
+
+import CockRoachCrafter.CockRoachCrafter;
 
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
-import org.powerbot.game.api.methods.Tabs;
-import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.Widgets;
 import org.powerbot.game.api.methods.interactive.Players;
-import org.powerbot.game.api.methods.node.GroundItems;
 import org.powerbot.game.api.methods.tab.Inventory;
-import org.powerbot.game.api.methods.widget.Camera;
-import org.powerbot.game.api.wrappers.node.GroundItem;
-import org.powerbot.game.api.wrappers.widget.Widget;
 
 public class CraftingHandler extends Node {
 

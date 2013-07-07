@@ -1,5 +1,6 @@
-package CockRoachCrafter;
+package CockRoachCrafter.Nodes.BankingHandlers;
 
+import CockRoachCrafter.CockRoachCrafter;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Calculations;
@@ -13,7 +14,7 @@ public class BankHandler extends Node {
 
     private final int[] BANKS = {42378,42377,42217};
     private final int[] ITEMS = {554,561,1734,379};
-    private final int[] ITEM_AMOUNTS = {15000,3000,1000,12};
+    private final int[] ITEM_AMOUNTS = {5000,1000,100,12};
 
     Tile bankTile = new Tile(3093,3494,0);
 
